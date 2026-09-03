@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>托育人員在職訓練紀錄表</title>
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-light: #e0f2fe;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+        }
+        .container { width: 100%; max-width: 480px; box-sizing: border-box; }
+        h1 { font-size: 20px; text-align: center; color: var(--primary); margin: 12px 0; }
+        .card { background: var(--card); border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .stat-box { background: var(--bg); padding: 12px; border-radius: 8px; text-align: center; border: 1px solid #e2e8f0; }
+        .stat-val { font-size: 18px; font-weight: bold; color: var(--primary); margin-top: 4px; }
+        .stat-val.alert { color: var(--danger); }
+        .alert-banner { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 10px; border-radius: 8px; font-size: 13px; margin-bottom: 12px; line-height: 1.4; }
+        
+        label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px; color: var(--text); }
+        input, select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 15px; box-sizing: border-box; margin-bottom: 12px; background: #fff; }
+        .btn { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; }
+        
+        table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: center; }
+        th { background: #f1f5f9; padding: 8px; font-weight: 600; border-bottom: 2px solid #e2e8f0; }
+        td { padding: 8px; border-bottom: 1px solid #edf2f7; }
+        .badge { padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 11px; }
+        .badge.ok { background: #dcfce7; color: #166534; }
+        .badge.no { background: #fee2e2; color: #991b1b; }
+
+        .log-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #edf2f7; font-size: 14px; }
+        .log-meta { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+        .toggle-btn { background: #f1f5f9; border: 1px solid #cbd5e1; padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer; }
+        .toggle-btn.is-active { background: var(--primary-light); color: var(--primary); border-color: #bae6fd; }
+        .del-btn { color: var(--danger); background: none; border: none; font-size: 12px; cursor: pointer; margin-left: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>👶 托育在職訓練紀錄</h1>
+
+    <!-- 儀表板 -->
+    <div class="card">
+        <div class="grid-2">
+            <div class="stat-box">
+                <div style="font-size:12px;color:var(--text-muted)">2026 已認列 / 目標</div>
+                <div class="stat-val" id="year-hours">0 / 18 小時</div>
+            </div>
+            <div class="stat-box">
+                <div style="font-size:12px;color:var(--text-muted)">2026 尚缺時數</div>
+                <div class="stat-val" id="year-lack">18 小時</div>
+            </div>
+        </div>
+        <div class="grid-2" style="margin-top: 10px;">
+            <div class="stat-box">
+                <div style="font-size:12px;color:var(--text-muted)">3年9類達標</div>
+                <div class="stat-val" id="cats-done">0 / 9 類</div>
+            </div>
+            <div class="stat-box">
+                <div style="font-size:12px;color:var(--text-muted)">年度完成率</div>
+                <div class="stat-val" id="year-rate">0%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 特殊檢核警示 -->
+    <div class="alert-banner" id="alert-banner">
+        載入中...
+    </div>
+
+    <!-- 新增紀錄 -->
+    <div class="card">
+        <label>上課日期</label>
+        <input type="date" id="c-date">
+        
+        <label>課程名稱</label>
+        <input type="text" id="c-name" placeholder="請輸入課程名稱">
+        
+        <div class="grid-2">
+            <div>
+                <label>課程類別</label>
+                <select id="c-cat">
+                    <option value="第一類">第一類 (兒發)</option>
+                    <option value="第二類">第二類</option>
+                    <option value="第三類">第三類</option>
+                    <option value="第四類">第四類</option>
+                    <option value="第五類">第五類 (安全)</option>
+                    <option value="第六類">第六類 (含CPR)</option>
+                    <option value="第七類">第七類</option>
+                    <option value="第八類">第八類</option>
+                    <option value="第九類">第九類</option>
+                </select>
+            </div>
+            <div>
+                <label>上課時數</label>
+                <input type="number" id="c-hours" step="0.5" min="0.5" placeholder="小時">
+            </div>
+        </div>
+        
+        <label>主辦單位 / 備註</label>
+        <input type="text" id="c-note" placeholder="例如：公司開、CPR 複訓">
+        
+        <button class="btn" onclick="addCourse()">新增課程紀錄</button>
+    </div>
+
+    <!-- 九大類別進度表 -->
+    <div class="card" style="padding: 10px;">
+        <h3 style="font-size:14px; margin: 4px 0 10px 6px;">九大類別檢核表</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>類別</th>
+                    <th>3年累計</th>
+                    <th>3年尚缺</th>
+                    <th>本年累計</th>
+                    <th>本年尚缺</th>
+                    <th>狀態</th>
+                </tr>
+            </thead>
+            <tbody id="cat-table-body">
+                <!-- 動態產生 -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 歷史清單 -->
+    <div class="card">
+        <h3 style="font-size:14px; margin: 0 0 10px 0;">課程清單 (最新在最前)</h3>
+        <div id="course-list"></div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('c-date').valueAsDate = new Date();
+
+    const catTargets = {
+        "第一類": { tri: 3, yr: 1 },
+        "第二類": { tri: 3, yr: 0 },
+        "第三類": { tri: 3, yr: 0 },
+        "第四類": { tri: 3, yr: 0 },
+        "第五類": { tri: 3, yr: 4 },
+        "第六類": { tri: 8, yr: 0 },
+        "第七類": { tri: 3, yr: 0 },
+        "第八類": { tri: 3, yr: 0 },
+        "第九類": { tri: 3, yr: 0 }
+    };
+
+    let courses = JSON.parse(localStorage.getItem('nanny_courses')) || [];
+
+    function initUI() {
+        render();
+    }
+
+    function render() {
+        let catStats = {};
+        for(let k in catTargets) {
+            catStats[k] = { triSum: 0, yrSum: 0 };
+        }
+
+        let totalYearHours = 0;
+
+        courses.forEach(c => {
+            if(c.isApproved) {
+                if(catStats[c.cat]) {
+                    catStats[c.cat].triSum += parseFloat(c.hours);
+                    if(c.date.startsWith('2026')) {
+                        catStats[c.cat].yrSum += parseFloat(c.hours);
+                        totalYearHours += parseFloat(c.hours);
+                    }
+                }
+            }
+        });
+
+        let lackYearHours = Math.max(0, 18 - totalYearHours);
+        document.getElementById('year-hours').innerText = totalYearHours.toFixed(1) + ' / 18 小時';
+        document.getElementById('year-lack').innerText = lackYearHours.toFixed(1) + ' 小時';
+        document.getElementById('year-rate').innerText = Math.min(100, (totalYearHours/18*100)).toFixed(0) + '%';
+
+        const tbody = document.getElementById('cat-table-body');
+        tbody.innerHTML = '';
+        let doneCatsCount = 0;
+
+        for(let cat in catTargets) {
+            let target = catTargets[cat];
+            let stat = catStats[cat];
+
+            let triLack = Math.max(0, target.tri - stat.triSum);
+            let yrLack = Math.max(0, target.yr - stat.yrSum);
+            
+            if(triLack === 0) doneCatsCount++;
+
+            let statusBadge = triLack === 0 ? '<span class="badge ok">達標</span>' : '<span class="badge no">缺時數</span>';
+
+            let tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td style="font-weight:600">` + cat + `</td>
+                <td>` + stat.triSum.toFixed(1) + ` / ` + target.tri + `</td>
+                <td style="color:` + (triLack>0?'var(--danger)':'var(--success)') + `">` + triLack.toFixed(1) + `</td>
+                <td>` + stat.yrSum.toFixed(1) + `</td>
+                <td style="color:` + (yrLack>0?'var(--danger)':'var(--text-muted)') + `">` + (target.yr > 0 ? yrLack.toFixed(1) : '-') + `</td>
+                <td>` + statusBadge + `</td>
+            `;
+            tbody.appendChild(tr);
+        }
+
+        document.getElementById('cats-done').innerText = doneCatsCount + ' / 9 類';
+
+        let cat1Lack = Math.max(0, catTargets["第一類"].yr - catStats["第一類"].yrSum);
+        let cat5Lack = Math.max(0, catTargets["第五類"].yr - catStats["第五類"].yrSum);
+        
+        let alertBanner = document.getElementById('alert-banner');
+        if(cat1Lack > 0 || cat5Lack > 0) {
+            alertBanner.style.display = 'block';
+            alertBanner.style.background = '#fef2f2';
+            alertBanner.style.color = '#991b1b';
+            alertBanner.style.borderColor = '#fecaca';
+            alertBanner.innerText = '⚠️ 年度特定類別尚缺：第1類(兒發)缺 ' + cat1Lack.toFixed(1) + ' 小時 / 第5類(安全)缺 ' + cat5Lack.toFixed(1) + ' 小時';
+        } else {
+            alertBanner.style.display = 'block';
+            alertBanner.style.background = '#ecfdf5';
+            alertBanner.style.color = '#065f46';
+            alertBanner.style.borderColor = '#a7f3d0';
+            alertBanner.innerText = '🎉 太棒了！年度第 1 類與第 5 類的核心時數皆已達標！';
+        }
+
+        const listDiv = document.getElementById('course-list');
+        listDiv.innerHTML = '';
+        
+        if(courses.length === 0) {
+            listDiv.innerHTML = '<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:10px;">暫無課程紀錄</div>';
+        }
+
+        courses.slice().reverse().forEach((c, idx) => {
+            const realIdx = courses.length - 1 - idx;
+            let div = document.createElement('div');
+            div.className = 'log-item';
+            div.innerHTML = `
+                <div>
+                    <div style="font-weight:600">` + escapeHtml(c.name) + ` <span style="color:var(--primary);font-size:12px;">[` + c.cat + `]</span></div>
+                    <div class="log-meta">` + c.date + ` | ` + escapeHtml(c.note || '無備註') + `</div>
+                </div>
+                <div style="display:flex; align-items:center;">
+                    <span style="font-weight:bold; margin-right:10px; color:` + (c.isApproved?'var(--success)':'var(--text-muted)') + `">` + c.hours + ` 小時</span>
+                    <button class="toggle-btn ` + (c.isApproved?'is-active':'') + `" onclick="toggleApprove(` + realIdx + `)">` + (c.isApproved?'已認列':'未認列') + `</button>
+                    <button class="del-btn" onclick="deleteCourse(` + realIdx + `)">🗑️</button>
+                </div>
+            `;
+            listDiv.appendChild(div);
+        });
+    }
+
+    function addCourse() {
+        const date = document.getElementById('c-date').value;
+        const name = document.getElementById('c-name').value.trim();
+        const cat = document.getElementById('c-cat').value;
+        const hours = document.getElementById('c-hours').value;
+        const note = document.getElementById('c-note').value.trim();
+
+        if(!date || !name || !hours) {
+            alert('請填寫完整必填欄位 (日期、課程名稱、時數)！');
+            return;
+        }
+
+        courses.push({
+            date, name, cat, hours: parseFloat(hours), note, isApproved: true
+        });
+
+        localStorage.setItem('nanny_courses', JSON.stringify(courses));
+        document.getElementById('c-name').value = '';
+        document.getElementById('c-hours').value = '';
+        document.getElementById('c-note').value = '';
+        render();
+    }
+
+    function toggleApprove(idx) {
+        courses[idx].isApproved = !courses[idx].isApproved;
+        localStorage.setItem('nanny_courses', JSON.stringify(courses));
+        render();
+    }
+
+    function deleteCourse(idx) {
+        if(confirm('確定要刪除這筆課時紀錄嗎？')) {
+            courses.splice(idx, 1);
+            localStorage.setItem('nanny_courses', JSON.stringify(courses));
+            render();
+        }
+    }
+
+    function escapeHtml(text) {
+        return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    initUI();
+</script>
+</body>
+</html>
