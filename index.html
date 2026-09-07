@@ -50,6 +50,12 @@
         .toggle-btn { background: #f1f5f9; border: 1px solid #cbd5e1; padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer; }
         .toggle-btn.is-active { background: var(--primary-light); color: var(--primary); border-color: #bae6fd; }
         .del-btn { color: var(--danger); background: none; border: none; font-size: 12px; cursor: pointer; margin-left: 8px; }
+        .section-title { font-size:14px; margin: 0 0 10px 0; color: var(--text); }
+        .small-note { font-size:12px; color:var(--text-muted); line-height:1.5; margin-top:-4px; margin-bottom:10px; }
+        .range-box { background: var(--primary-light); border: 1px solid #bae6fd; color: #075985; padding: 10px; border-radius: 8px; font-size: 13px; line-height: 1.5; margin-top: 8px; }
+        .secondary-btn { width: 100%; padding: 10px; background: white; color: var(--primary); border: 1px solid #bae6fd; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; }
+        .button-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .filter-card { padding-bottom: 12px; }
     </style>
 </head>
 <body>
@@ -57,15 +63,30 @@
 <div class="container">
     <h1>👶 托育在職訓練紀錄</h1>
 
+    <div class="card">
+        <h3 class="section-title">⚙️ 登記證三年週期設定</h3>
+        <label>登記證起算日</label>
+        <input type="date" id="cycle-start">
+        <button class="secondary-btn" onclick="saveCycleStart()">儲存起算日</button>
+        <div class="range-box" id="cycle-range">請設定登記證起算日</div>
+    </div>
+
+    <div class="card filter-card">
+        <h3 class="section-title">📅 年度進度檢視</h3>
+        <label>目前檢視年度</label>
+        <select id="year-select" onchange="changeSelectedYear()"></select>
+        <div class="small-note" id="year-filter-note"></div>
+    </div>
+
     <!-- 儀表板 -->
     <div class="card">
         <div class="grid-2">
             <div class="stat-box">
-                <div style="font-size:12px;color:var(--text-muted)">2026 已認列 / 目標</div>
+                <div style="font-size:12px;color:var(--text-muted)"><span id="year-label">年度</span> 已認列 / 目標</div>
                 <div class="stat-val" id="year-hours">0 / 18 小時</div>
             </div>
             <div class="stat-box">
-                <div style="font-size:12px;color:var(--text-muted)">2026 尚缺時數</div>
+                <div style="font-size:12px;color:var(--text-muted)"><span id="year-lack-label">年度</span> 尚缺時數</div>
                 <div class="stat-val" id="year-lack">18 小時</div>
             </div>
         </div>
@@ -141,6 +162,16 @@
         </table>
     </div>
 
+    <div class="card">
+        <h3 class="section-title">💾 資料備份與還原</h3>
+        <div class="small-note">備份檔會包含所有課程紀錄、三年週期起算日與目前設定。</div>
+        <div class="button-row">
+            <button class="secondary-btn" onclick="exportData()">匯出 JSON 備份</button>
+            <button class="secondary-btn" onclick="document.getElementById('import-file').click()">匯入 JSON 備份</button>
+        </div>
+        <input type="file" id="import-file" accept="application/json,.json" style="display:none" onchange="importData(event)">
+    </div>
+
     <!-- 歷史清單 -->
     <div class="card">
         <h3 style="font-size:14px; margin: 0 0 10px 0;">課程清單 (最新在最前)</h3>
@@ -149,166 +180,43 @@
 </div>
 
 <script>
-    document.getElementById('c-date').valueAsDate = new Date();
+const STORAGE_KEY='nanny_courses', SETTINGS_KEY='nanny_training_settings';
+const catTargets={"第一類":{tri:3,yr:1},"第二類":{tri:3,yr:0},"第三類":{tri:3,yr:0},"第四類":{tri:3,yr:0},"第五類":{tri:3,yr:4},"第六類":{tri:8,yr:0},"第七類":{tri:3,yr:0},"第八類":{tri:3,yr:0},"第九類":{tri:3,yr:0}};
+let courses=JSON.parse(localStorage.getItem(STORAGE_KEY))||[];
+let settings=JSON.parse(localStorage.getItem(SETTINGS_KEY))||{cycleStart:'',selectedYear:null};
 
-    const catTargets = {
-        "第一類": { tri: 3, yr: 1 },
-        "第二類": { tri: 3, yr: 0 },
-        "第三類": { tri: 3, yr: 0 },
-        "第四類": { tri: 3, yr: 0 },
-        "第五類": { tri: 3, yr: 4 },
-        "第六類": { tri: 8, yr: 0 },
-        "第七類": { tri: 3, yr: 0 },
-        "第八類": { tri: 3, yr: 0 },
-        "第九類": { tri: 3, yr: 0 }
-    };
+function parseDate(v){if(!v)return null;const d=new Date(v+'T00:00:00');return Number.isNaN(d.getTime())?null:d}
+function formatDate(d){return d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate()}
+function getCycleRange(){const s=parseDate(settings.cycleStart);if(!s)return null;const e=new Date(s);e.setFullYear(e.getFullYear()+3);e.setDate(e.getDate()-1);return{start:s,end:e}}
+function isInCycle(v){const r=getCycleRange();if(!r)return true;const d=parseDate(v);return !!d&&d>=r.start&&d<=r.end}
+function getCycleYears(){const r=getCycleRange();if(!r)return[new Date().getFullYear()];const a=[];for(let y=r.start.getFullYear();y<=r.end.getFullYear();y++)a.push(y);return a}
+function saveSettings(){localStorage.setItem(SETTINGS_KEY,JSON.stringify(settings))}
+function refreshCycleUI(){const box=document.getElementById('cycle-range'),r=getCycleRange();if(!r){box.innerText='請設定登記證起算日，系統會自動計算三年有效區間與可檢視年度。';return}box.innerHTML='<strong>有效區間：</strong>'+formatDate(r.start)+' ～ '+formatDate(r.end)+'<br><span style="font-size:12px">本週期共 3 年，系統只會將區間內課程計入九大類別三年累計。</span>'}
+function refreshYearSelect(){const s=document.getElementById('year-select'),ys=getCycleYears(),now=new Date().getFullYear();if(!settings.selectedYear||!ys.includes(Number(settings.selectedYear))){settings.selectedYear=ys.includes(now)?now:ys[0];saveSettings()}s.innerHTML=ys.map(y=>'<option value="'+y+'"'+(Number(settings.selectedYear)===y?' selected':'')+'>'+y+' 年度</option>').join('');document.getElementById('year-label').innerText=settings.selectedYear+' 年度';document.getElementById('year-lack-label').innerText=settings.selectedYear+' 年度';document.getElementById('year-filter-note').innerText=getCycleRange()?'正在檢視 '+settings.selectedYear+' 年的年度進度；三年累計則依登記證有效區間計算。':'尚未設定起算日，目前暫以 '+settings.selectedYear+' 年度檢視。'}
+function saveCycleStart(){const v=document.getElementById('cycle-start').value;if(!v){alert('請先選擇登記證起算日！');return}settings.cycleStart=v;settings.selectedYear=null;saveSettings();refreshCycleUI();refreshYearSelect();render()}
+function changeSelectedYear(){settings.selectedYear=Number(document.getElementById('year-select').value);saveSettings();refreshYearSelect();render()}
+function initUI(){document.getElementById('c-date').valueAsDate=new Date();document.getElementById('cycle-start').value=settings.cycleStart||'';refreshCycleUI();refreshYearSelect();render()}
 
-    let courses = JSON.parse(localStorage.getItem('nanny_courses')) || [];
+function render(){
+ const y=Number(settings.selectedYear||new Date().getFullYear()),stats={};for(const k in catTargets)stats[k]={triSum:0,yrSum:0};let total=0;
+ courses.forEach(c=>{if(!c.isApproved||!stats[c.cat])return;const h=parseFloat(c.hours)||0;if(isInCycle(c.date))stats[c.cat].triSum+=h;if(String(c.date).startsWith(String(y)+'-')){stats[c.cat].yrSum+=h;total+=h}});
+ const lack=Math.max(0,18-total);document.getElementById('year-hours').innerText=total.toFixed(1)+' / 18 小時';document.getElementById('year-lack').innerText=lack.toFixed(1)+' 小時';document.getElementById('year-rate').innerText=Math.min(100,total/18*100).toFixed(0)+'%';
+ const tbody=document.getElementById('cat-table-body');tbody.innerHTML='';let done=0;
+ for(const cat in catTargets){const t=catTargets[cat],s=stats[cat],tl=Math.max(0,t.tri-s.triSum),yl=Math.max(0,t.yr-s.yrSum);if(tl===0)done++;const badge=tl===0?'<span class="badge ok">達標</span>':'<span class="badge no">缺時數</span>';const tr=document.createElement('tr');tr.innerHTML='<td style="font-weight:600">'+cat+'</td><td>'+s.triSum.toFixed(1)+' / '+t.tri+'</td><td style="color:'+(tl>0?'var(--danger)':'var(--success)')+'">'+tl.toFixed(1)+'</td><td>'+s.yrSum.toFixed(1)+'</td><td style="color:'+(yl>0?'var(--danger)':'var(--text-muted)')+'">'+(t.yr>0?yl.toFixed(1):'-')+'</td><td>'+badge+'</td>';tbody.appendChild(tr)}
+ document.getElementById('cats-done').innerText=done+' / 9 類';
+ const c1=Math.max(0,catTargets["第一類"].yr-stats["第一類"].yrSum),c5=Math.max(0,catTargets["第五類"].yr-stats["第五類"].yrSum),a=document.getElementById('alert-banner');
+ if(c1>0||c5>0){a.style.background='#fef2f2';a.style.color='#991b1b';a.style.borderColor='#fecaca';a.innerText='⚠️ '+y+' 年度特定類別尚缺：第1類(兒發)缺 '+c1.toFixed(1)+' 小時 / 第5類(安全)缺 '+c5.toFixed(1)+' 小時'}else{a.style.background='#ecfdf5';a.style.color='#065f46';a.style.borderColor='#a7f3d0';a.innerText='🎉 太棒了！'+y+' 年度第 1 類與第 5 類的核心時數皆已達標！'}
+ const list=document.getElementById('course-list');list.innerHTML='';if(!courses.length)list.innerHTML='<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:10px;">暫無課程紀錄</div>';
+ courses.slice().reverse().forEach((c,i)=>{const idx=courses.length-1-i,d=document.createElement('div');d.className='log-item';const warn=isInCycle(c.date)?'':' <span style="color:var(--danger);font-size:11px;">（不在目前三年週期）</span>';d.innerHTML='<div><div style="font-weight:600">'+escapeHtml(c.name)+' <span style="color:var(--primary);font-size:12px;">['+c.cat+']</span></div><div class="log-meta">'+c.date+' | '+escapeHtml(c.note||'無備註')+warn+'</div></div><div style="display:flex;align-items:center;"><span style="font-weight:bold;margin-right:10px;color:'+(c.isApproved?'var(--success)':'var(--text-muted)')+'">'+c.hours+' 小時</span><button class="toggle-btn '+(c.isApproved?'is-active':'')+'" onclick="toggleApprove('+idx+')">'+(c.isApproved?'已認列':'未認列')+'</button><button class="del-btn" onclick="deleteCourse('+idx+')">🗑️</button></div>';list.appendChild(d)})
+}
 
-    function initUI() {
-        render();
-    }
-
-    function render() {
-        let catStats = {};
-        for(let k in catTargets) {
-            catStats[k] = { triSum: 0, yrSum: 0 };
-        }
-
-        let totalYearHours = 0;
-
-        courses.forEach(c => {
-            if(c.isApproved) {
-                if(catStats[c.cat]) {
-                    catStats[c.cat].triSum += parseFloat(c.hours);
-                    if(c.date.startsWith('2026')) {
-                        catStats[c.cat].yrSum += parseFloat(c.hours);
-                        totalYearHours += parseFloat(c.hours);
-                    }
-                }
-            }
-        });
-
-        let lackYearHours = Math.max(0, 18 - totalYearHours);
-        document.getElementById('year-hours').innerText = totalYearHours.toFixed(1) + ' / 18 小時';
-        document.getElementById('year-lack').innerText = lackYearHours.toFixed(1) + ' 小時';
-        document.getElementById('year-rate').innerText = Math.min(100, (totalYearHours/18*100)).toFixed(0) + '%';
-
-        const tbody = document.getElementById('cat-table-body');
-        tbody.innerHTML = '';
-        let doneCatsCount = 0;
-
-        for(let cat in catTargets) {
-            let target = catTargets[cat];
-            let stat = catStats[cat];
-
-            let triLack = Math.max(0, target.tri - stat.triSum);
-            let yrLack = Math.max(0, target.yr - stat.yrSum);
-            
-            if(triLack === 0) doneCatsCount++;
-
-            let statusBadge = triLack === 0 ? '<span class="badge ok">達標</span>' : '<span class="badge no">缺時數</span>';
-
-            let tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td style="font-weight:600">` + cat + `</td>
-                <td>` + stat.triSum.toFixed(1) + ` / ` + target.tri + `</td>
-                <td style="color:` + (triLack>0?'var(--danger)':'var(--success)') + `">` + triLack.toFixed(1) + `</td>
-                <td>` + stat.yrSum.toFixed(1) + `</td>
-                <td style="color:` + (yrLack>0?'var(--danger)':'var(--text-muted)') + `">` + (target.yr > 0 ? yrLack.toFixed(1) : '-') + `</td>
-                <td>` + statusBadge + `</td>
-            `;
-            tbody.appendChild(tr);
-        }
-
-        document.getElementById('cats-done').innerText = doneCatsCount + ' / 9 類';
-
-        let cat1Lack = Math.max(0, catTargets["第一類"].yr - catStats["第一類"].yrSum);
-        let cat5Lack = Math.max(0, catTargets["第五類"].yr - catStats["第五類"].yrSum);
-        
-        let alertBanner = document.getElementById('alert-banner');
-        if(cat1Lack > 0 || cat5Lack > 0) {
-            alertBanner.style.display = 'block';
-            alertBanner.style.background = '#fef2f2';
-            alertBanner.style.color = '#991b1b';
-            alertBanner.style.borderColor = '#fecaca';
-            alertBanner.innerText = '⚠️ 年度特定類別尚缺：第1類(兒發)缺 ' + cat1Lack.toFixed(1) + ' 小時 / 第5類(安全)缺 ' + cat5Lack.toFixed(1) + ' 小時';
-        } else {
-            alertBanner.style.display = 'block';
-            alertBanner.style.background = '#ecfdf5';
-            alertBanner.style.color = '#065f46';
-            alertBanner.style.borderColor = '#a7f3d0';
-            alertBanner.innerText = '🎉 太棒了！年度第 1 類與第 5 類的核心時數皆已達標！';
-        }
-
-        const listDiv = document.getElementById('course-list');
-        listDiv.innerHTML = '';
-        
-        if(courses.length === 0) {
-            listDiv.innerHTML = '<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:10px;">暫無課程紀錄</div>';
-        }
-
-        courses.slice().reverse().forEach((c, idx) => {
-            const realIdx = courses.length - 1 - idx;
-            let div = document.createElement('div');
-            div.className = 'log-item';
-            div.innerHTML = `
-                <div>
-                    <div style="font-weight:600">` + escapeHtml(c.name) + ` <span style="color:var(--primary);font-size:12px;">[` + c.cat + `]</span></div>
-                    <div class="log-meta">` + c.date + ` | ` + escapeHtml(c.note || '無備註') + `</div>
-                </div>
-                <div style="display:flex; align-items:center;">
-                    <span style="font-weight:bold; margin-right:10px; color:` + (c.isApproved?'var(--success)':'var(--text-muted)') + `">` + c.hours + ` 小時</span>
-                    <button class="toggle-btn ` + (c.isApproved?'is-active':'') + `" onclick="toggleApprove(` + realIdx + `)">` + (c.isApproved?'已認列':'未認列') + `</button>
-                    <button class="del-btn" onclick="deleteCourse(` + realIdx + `)">🗑️</button>
-                </div>
-            `;
-            listDiv.appendChild(div);
-        });
-    }
-
-    function addCourse() {
-        const date = document.getElementById('c-date').value;
-        const name = document.getElementById('c-name').value.trim();
-        const cat = document.getElementById('c-cat').value;
-        const hours = document.getElementById('c-hours').value;
-        const note = document.getElementById('c-note').value.trim();
-
-        if(!date || !name || !hours) {
-            alert('請填寫完整必填欄位 (日期、課程名稱、時數)！');
-            return;
-        }
-
-        courses.push({
-            date, name, cat, hours: parseFloat(hours), note, isApproved: true
-        });
-
-        localStorage.setItem('nanny_courses', JSON.stringify(courses));
-        document.getElementById('c-name').value = '';
-        document.getElementById('c-hours').value = '';
-        document.getElementById('c-note').value = '';
-        render();
-    }
-
-    function toggleApprove(idx) {
-        courses[idx].isApproved = !courses[idx].isApproved;
-        localStorage.setItem('nanny_courses', JSON.stringify(courses));
-        render();
-    }
-
-    function deleteCourse(idx) {
-        if(confirm('確定要刪除這筆課時紀錄嗎？')) {
-            courses.splice(idx, 1);
-            localStorage.setItem('nanny_courses', JSON.stringify(courses));
-            render();
-        }
-    }
-
-    function escapeHtml(text) {
-        return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    }
-
-    initUI();
+function addCourse(){const date=document.getElementById('c-date').value,name=document.getElementById('c-name').value.trim(),cat=document.getElementById('c-cat').value,hours=document.getElementById('c-hours').value,note=document.getElementById('c-note').value.trim();if(!date||!name||!hours){alert('請填寫完整必填欄位 (日期、課程名稱、時數)！');return}courses.push({date,name,cat,hours:parseFloat(hours),note,isApproved:true});localStorage.setItem(STORAGE_KEY,JSON.stringify(courses));document.getElementById('c-name').value='';document.getElementById('c-hours').value='';document.getElementById('c-note').value='';render()}
+function toggleApprove(i){courses[i].isApproved=!courses[i].isApproved;localStorage.setItem(STORAGE_KEY,JSON.stringify(courses));render()}
+function deleteCourse(i){if(confirm('確定要刪除這筆課時紀錄嗎？')){courses.splice(i,1);localStorage.setItem(STORAGE_KEY,JSON.stringify(courses));render()}}
+function exportData(){const b={app:'托育在職訓練紀錄',version:2,exportedAt:new Date().toISOString(),settings,courses},blob=new Blob([JSON.stringify(b,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='托育在職訓練備份_'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url)}
+function importData(e){const f=e.target.files&&e.target.files[0];if(!f)return;const r=new FileReader();r.onload=x=>{try{const d=JSON.parse(x.target.result);if(!Array.isArray(d.courses))throw new Error();if(!confirm('匯入後會覆蓋目前瀏覽器內的課程紀錄與設定，確定要繼續嗎？'))return;courses=d.courses.map(c=>({date:String(c.date||''),name:String(c.name||''),cat:String(c.cat||'第一類'),hours:Number(c.hours)||0,note:String(c.note||''),isApproved:c.isApproved!==false}));settings={cycleStart:d.settings&&d.settings.cycleStart?d.settings.cycleStart:'',selectedYear:d.settings&&d.settings.selectedYear?Number(d.settings.selectedYear):null};localStorage.setItem(STORAGE_KEY,JSON.stringify(courses));saveSettings();document.getElementById('cycle-start').value=settings.cycleStart||'';refreshCycleUI();refreshYearSelect();render();alert('資料匯入成功！共匯入 '+courses.length+' 筆課程紀錄。')}catch(err){alert('匯入失敗：請確認你選擇的是本系統匯出的有效 JSON 備份檔。')}finally{e.target.value=''}};r.readAsText(f,'utf-8')}
+function escapeHtml(t){return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
+initUI();
 </script>
 </body>
 </html>
