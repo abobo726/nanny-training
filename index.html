@@ -1,48 +1,222 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>🏠 家庭分帳小本本｜四人欠款卡片</title><style>
-*{box-sizing:border-box}body{margin:0;background:#f6f7fb;color:#243247;font-family:system-ui,-apple-system,'Microsoft JhengHei',sans-serif}.wrap{max-width:850px;margin:auto;padding:18px 14px 90px}h1{font-size:26px;margin:8px 0}h2{font-size:20px;margin:0 0 13px}.sub{color:#667085;margin:0 0 15px}.panel,.person{background:white;border-radius:20px;padding:17px;box-shadow:0 3px 16px #1725540d;margin:13px 0}.people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.person{margin:0;min-height:150px;border-top:5px solid #94a3b8}.person:nth-child(1){border-color:#60a5fa}.person:nth-child(2){border-color:#f9a8d4}.person:nth-child(3){border-color:#86efac}.person:nth-child(4){border-color:#fcd34d}.personhead{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:12px}.personhead strong{font-size:21px}.count{font-size:13px;background:#f1f5f9;border-radius:20px;padding:5px 9px;color:#475569}.debt{background:#f8fafc;border:1px solid #e2e8f0;border-radius:15px;padding:12px;margin:9px 0}.debtline{display:flex;align-items:center;gap:9px}.debtline input{width:26px;height:26px;flex:none;accent-color:#16a34a}.debtmain{flex:1;min-width:0}.debtmain b{display:block;font-size:16px}.sum{font-size:22px;font-weight:850;color:#1d4ed8}.detail{font-size:13px;color:#64748b;margin:6px 0 0 35px;overflow-wrap:anywhere}.none{padding:18px 5px;text-align:center;color:#16a34a;font-weight:700}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{border:0;border-radius:13px;min-height:52px;padding:11px 15px;font-size:17px;font-weight:800;cursor:pointer}.primary{background:#2563eb;color:white}.secondary{background:#e9efff;color:#1d4ed8}.soft{background:#f1f5f9;color:#334155}.danger{background:#fff1f2;color:#be123c}.full{width:100%}.field{margin:13px 0}.field label{display:block;font-weight:750;margin-bottom:7px}input:not([type=checkbox]),select{width:100%;min-height:51px;padding:11px;border:2px solid #e2e8f0;border-radius:12px;font-size:18px;background:white;color:#1f2937}.checkrow{display:flex;align-items:center;gap:10px;padding:9px 0;font-size:17px}.checkrow input{width:23px;height:23px;accent-color:#2563eb}.hint{font-size:14px;color:#64748b;line-height:1.6}.hidden{display:none!important}.record{padding:12px 0;border-bottom:1px solid #e5e7eb;display:flex;justify-content:space-between;gap:10px}.record:last-child{border:0}.record strong{font-size:17px}.record small{display:block;color:#64748b;margin-top:5px;line-height:1.5}.recordright{text-align:right;flex:none}.small{font-size:14px;min-height:34px;padding:5px 10px}.tabs{display:flex;gap:8px;margin:12px 0}.tabs button{flex:1;font-size:15px;min-height:44px}.tabs .active{background:#2563eb;color:white}.membergrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.muted{color:#64748b}.notice{padding:12px;background:#fff7ed;color:#9a3412;border-radius:12px;font-size:14px;line-height:1.6}.overlay{position:fixed;inset:0;background:#0f172a80;display:flex;align-items:center;justify-content:center;padding:18px;z-index:9}.dialog{background:white;border-radius:20px;padding:22px;width:min(100%,440px);max-height:90vh;overflow:auto}.dialog h2{margin-bottom:6px}.date-note{font-size:13px;color:#64748b;margin-top:5px}@media(max-width:580px){.people{grid-template-columns:1fr}.wrap{padding:13px 12px 80px}h1{font-size:24px}.person{min-height:0}.btn{font-size:16px}}
-.summarybar{background:linear-gradient(125deg,#2563eb,#4f46e5);color:white;border-radius:20px;padding:19px;margin:15px 0;box-shadow:0 6px 18px #1d4ed82b}.summarybar .big{font-size:32px;font-weight:850;margin:5px 0}.personTotal{font-size:17px;font-weight:800;color:#1d4ed8;margin:6px 0 12px}.inlineActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.tiny{min-height:34px;padding:6px 12px;font-size:14px}.detailPanel{background:#f1f5f9;padding:12px;border-radius:12px;margin-top:9px}.detailRow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid #dbe3ef}.detailRow:last-child{border:0}.detailRow small{color:#64748b;display:block;margin-top:4px}.bulkbar{position:sticky;bottom:8px;z-index:3;background:white;border:2px solid #bfdbfe;border-radius:16px;padding:12px;box-shadow:0 5px 20px #17255424;margin:10px 0}.editRecord{padding:12px;border:1px solid #e2e8f0;border-radius:12px;margin:9px 0}.audit{font-size:13px;color:#64748b;border-bottom:1px solid #e2e8f0;padding:7px 0}details>summary{cursor:pointer;font-weight:750;padding:8px 0}.dangerText{color:#be123c}.checkboxLabel{display:flex;align-items:center;gap:10px}.checkboxLabel input{width:24px;height:24px;accent-color:#2563eb}button:disabled{opacity:.5;cursor:not-allowed}@media(max-width:580px){.summarybar .big{font-size:29px}}
-</style></head><body><div class="wrap"><h1>🏠 家庭分帳小本本</h1><p class="sub">四個人的欠款一眼看懂，還清就打勾 💛</p><div class="panel" id="cloudPanel"><h2>☁️ 家庭雲端同步</h2><p id="cloudStatus" class="hint">請先登入，才會啟用雲端帳本。</p><div id="loginBox"><div class="field"><label>登入 Email</label><input id="loginEmail" type="email" autocomplete="email" placeholder="你的 Supabase 登入 Email"></div><div class="field"><label>密碼</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="登入密碼"></div><button class="btn primary full" onclick="cloudLogin()">登入家庭帳本</button></div><button id="logoutBtn" class="btn soft full hidden" onclick="cloudLogout()">登出</button></div><div id="ledgerContent" class="hidden"><div class="panel"><div class="actions"><button class="btn primary" onclick="showForm('expense')">＋ 記一筆花費</button><button class="btn secondary" onclick="showForm('repay')">💸 部分還款</button></div></div><div class="summarybar"><div>💰 全家目前待還款總額（互相抵銷後）</div><div class="big" id="familyTotal">$0</div><div id="familyCount">0 筆待還</div></div><h2 style="margin:22px 4px 12px">💰 四個人的待還款</h2><div class="bulkbar"><div id="bulkSummary" style="font-weight:800;margin-bottom:8px">已選 0 筆，合計 $0</div><div class="actions"><button class="btn primary" id="bulkButton" onclick="openBulkSettle()" disabled>✓ 一次還清選取項目</button><button class="btn soft" onclick="clearSelection()">取消勾選</button></div></div><div id="people" class="people"></div><div id="formPanel" class="panel hidden"><h2 id="formTitle"></h2><div class="field"><label for="memo">這筆是什麼？</label><input id="memo" placeholder="例如：買晚餐、幫忙代墊"></div><div class="field"><label for="amount">金額（元）</label><input id="amount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="例如：300"></div><div class="field"><label for="payer" id="payerLabel">誰付的錢？</label><select id="payer"></select></div><div id="expenseFields"><div class="field"><label>這筆錢幫誰付？（可多選）</label><div id="beneficiaries"></div><div class="hint">選多人就平均分攤；付款人也可以一起分攤。</div></div></div><div class="field" id="entryDateField"><label for="entryDate">消費日期</label><input type="date" id="entryDate"></div><div id="repayFields" class="hidden"><div class="field"><label for="receiver">還給誰？</label><select id="receiver"></select></div><div class="field"><label for="repayDate">實際還款日期</label><input type="date" id="repayDate"></div></div><button class="btn primary full" id="saveEntryButton" onclick="saveEntry()">✓ 儲存</button><button class="btn soft full" style="margin-top:8px" onclick="hideForm()">取消</button></div><div class="panel"><h2>📚 帳目紀錄</h2><div class="tabs"><button class="btn soft active" id="tabPending" onclick="setTab('pending')">未結清明細</button><button class="btn soft" id="tabPaid" onclick="setTab('paid')">✓ 已還款</button></div><div id="records"></div><p class="hint">「已還款」會收在這裡，不佔用上方四個人的欠款區。</p></div><div class="panel" id="managePanel"><h2>✏️ 全部原始帳目管理</h2><p class="hint">每筆消費與還款都可以編輯、移到回收區。也可以直接在上面的欠款細項點「編輯」。</p><div id="entryManager"></div><details style="margin-top:15px"><summary>🗑️ 回收區 <span id="trashCount"></span></summary><div id="trashRecords"></div></details><details style="margin-top:12px"><summary>🕘 修改紀錄</summary><div id="auditRecords"></div></details></div><div class="panel"><h2>👨‍👩‍👧‍👦 家人名稱與頭像</h2><p class='hint'>點選頭像可以上傳照片，或直接選可愛圖案。</p><div id="members" class="membergrid"></div><button class="btn secondary full" style="margin-top:12px" onclick="saveMembers()">儲存家人名稱</button></div><div class="panel"><h2>📦 備份與還原</h2><div class="actions"><button class="btn soft" onclick="exportBackup()">下載備份</button><button class="btn soft" onclick="document.getElementById('importFile').click()">匯入備份</button></div><input id="importFile" type="file" accept=".json,application/json" class="hidden" onchange="importBackup(event)"><p class="notice">登入後才會同步雲端；尚未登入時請勿輸入正式帳目。原本瀏覽器的測試資料不會自動上傳。</p></div></div></div><div id="settleOverlay" class="overlay hidden" role="dialog" aria-modal="true"><div class="dialog"><h2>✅ 確認還清</h2><p id="settleDesc" class="sub"></p><div id="settleItems" class="hint"></div><div class="field"><label for="settleDate">哪一天還款？</label><input id="settleDate" type="date"></div><div class="field"><label for="settleMemo">備註（選填）</label><input id="settleMemo" placeholder="例如：現金、轉帳"></div><button class="btn primary full" onclick="confirmSettle()">確認已還清</button><button class="btn soft full" style="margin-top:8px" onclick="cancelSettle()">先不要</button></div></div><script>
-'use strict';const KEY='family_split_demo_v1';const defaultState=()=>({members:['阿寶','媽媽','爸爸','家人 4'],entries:[],avatars:['🐱','🌷','👨','🐻']});let state=defaultState(),mode='expense',tab='pending',settling=null,editingId=null;let selectedDebts=new Set();try{let s=JSON.parse(localStorage.getItem(KEY));if(s&&Array.isArray(s.members)&&s.members.length===4&&Array.isArray(s.entries))state=s;}catch(e){}const $=id=>document.getElementById(id),safe=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),money=c=>'$'+(c/100).toLocaleString('zh-TW',{maximumFractionDigits:2}),name=i=>state.members[i]||'家人',today=()=>{let d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`},persist=()=>{localStorage.setItem(KEY,JSON.stringify(state));queueCloudSave();},uid=()=>Date.now()+'_'+Math.random().toString(36).slice(2),opts=()=>state.members.map((n,i)=>`<option value="${i}">${safe(n)}</option>`).join('');
-function getDebts(){let d=Array.from({length:4},()=>Array(4).fill(0));for(const e of state.entries){if(e.deleted||!Number.isSafeInteger(e.amount)||e.amount<=0||!Number.isInteger(e.payer)||e.payer<0||e.payer>3)continue;if(e.kind==='expense'){let ps=[...new Set((e.people||[]).filter(i=>Number.isInteger(i)&&i>=0&&i<4))];if(!ps.length)continue;let base=Math.floor(e.amount/ps.length),rem=e.amount%ps.length;ps.forEach((p,k)=>{if(p!==e.payer)d[p][e.payer]+=base+(k<rem?1:0);});}else if(e.kind==='repay'&&Number.isInteger(e.receiver)&&e.receiver>=0&&e.receiver<4&&e.receiver!==e.payer)d[e.payer][e.receiver]-=e.amount;}let result=[];for(let i=0;i<4;i++)for(let j=i+1;j<4;j++){let n=d[i][j]-d[j][i];if(n>0)result.push({from:i,to:j,amount:n});else if(n<0)result.push({from:j,to:i,amount:-n});}return result;}
-function pairKey(d){return d.from+'-'+d.to;}
-function getExpenseLines(from,to){let lines=[];for(const e of state.entries){if(e.deleted||e.kind!=='expense'||e.payer!==to||!Number.isSafeInteger(e.amount)||e.amount<=0)continue;let ps=[...new Set((e.people||[]).filter(i=>Number.isInteger(i)&&i>=0&&i<4))];let k=ps.indexOf(from);if(k<0||from===to)continue;let share=Math.floor(e.amount/ps.length)+(k<e.amount%ps.length?1:0);if(share>0)lines.push({e,share});}return lines;}
-function detailForDebt(d){let direct=getExpenseLines(d.from,d.to),reverse=getExpenseLines(d.to,d.from);let directSum=direct.reduce((a,x)=>a+x.share,0),reverseSum=reverse.reduce((a,x)=>a+x.share,0);let paidForward=state.entries.filter(e=>!e.deleted&&e.kind==='repay'&&e.payer===d.from&&e.receiver===d.to).reduce((a,e)=>a+e.amount,0),paidReverse=state.entries.filter(e=>!e.deleted&&e.kind==='repay'&&e.payer===d.to&&e.receiver===d.from).reduce((a,e)=>a+e.amount,0);let html=direct.map(x=>`<div class="detailRow"><div><b>${safe(x.e.memo)}</b><small>${safe(String(x.e.date||'').slice(0,10))} · 分攤 ${money(x.share)}</small></div><button class="btn soft tiny" onclick="editEntry('${safe(x.e.id)}')">✏️ 編輯</button></div>`).join('');if(!html)html='<div class="hint">目前無直接消費明細（可能來自過去還款調整）。</div>';let offset=reverseSum+paidForward-paidReverse;html+=`<div class="detailRow"><div>原始消費分攤合計</div><b>${money(directSum)}</b></div><div class="detailRow"><div>反向消費互抵與還款淨額<small>反向消費 ${money(reverseSum)} · 已還 ${money(paidForward)} · 反向還款 ${money(paidReverse)}</small></div><b>${offset>=0?'−':'+'}${money(Math.abs(offset))}</b></div><div class="detailRow"><b>目前實際應還</b><b>${money(d.amount)}</b></div>`;if(reverse.length)html+=`<details><summary>查看反向抵銷的消費（${reverse.length} 筆）</summary>${reverse.map(x=>`<div class="detailRow"><div>${safe(x.e.memo)}<small>${safe(String(x.e.date||'').slice(0,10))} · ${money(x.share)}</small></div><button class="btn soft tiny" onclick="editEntry('${safe(x.e.id)}')">編輯</button></div>`).join('')}</details>`;return html;}
-function renderPeople(){let debts=getDebts(),valid=new Set(debts.map(pairKey));for(let k of [...selectedDebts])if(!valid.has(k))selectedDebts.delete(k);$('familyTotal').textContent=money(debts.reduce((a,d)=>a+d.amount,0));$('familyCount').textContent=debts.length+' 組待還款關係';$('people').innerHTML=state.members.map((n,i)=>{let rows=debts.filter(d=>d.from===i),total=rows.reduce((a,d)=>a+d.amount,0);return `<section class="person"><div class="personhead"><strong>${avatarHtml(i)} ${safe(n)}</strong><span class="count">${rows.length} 組待還</span></div><div class="personTotal">待還合計：${money(total)}</div>${rows.length?rows.map(d=>`<div class="debt"><div class="debtline"><input type="checkbox" aria-label="選取 ${safe(name(d.from))} 欠 ${safe(name(d.to))} 的欠款" ${selectedDebts.has(pairKey(d))?'checked':''} onchange="toggleDebt(${d.from},${d.to},this.checked)"><div class="debtmain"><b>欠 ${safe(name(d.to))}</b><span class="sum">${money(d.amount)}</span></div></div><details class="detailPanel"><summary>🔎 查看消費細項與自動抵銷</summary>${detailForDebt(d)}</details><div class="inlineActions"><button class="btn secondary tiny" onclick="openSettle(${d.from},${d.to})">✓ 單組還清</button></div></div>`).join(''):'<div class="none">🎉 目前沒有欠款！</div>'}</section>`;}).join('');updateBulkSummary();}
-function toggleDebt(from,to,checked){let key=from+'-'+to;if(checked)selectedDebts.add(key);else selectedDebts.delete(key);updateBulkSummary();}
-function clearSelection(){selectedDebts.clear();renderPeople();}
-function updateBulkSummary(){let ds=getDebts().filter(d=>selectedDebts.has(pairKey(d)));$('bulkSummary').textContent=`已選 ${ds.length} 組，合計 ${money(ds.reduce((a,d)=>a+d.amount,0))}`;$('bulkButton').disabled=!ds.length;}
-function openBulkSettle(){let ds=getDebts().filter(d=>selectedDebts.has(pairKey(d)));if(!ds.length)return;settling=ds.map(d=>({from:d.from,to:d.to,amount:d.amount}));$('settleDesc').textContent=`一次還清 ${ds.length} 組，合計 ${money(ds.reduce((a,d)=>a+d.amount,0))}`;$('settleItems').innerHTML=ds.map(d=>`<div>${safe(name(d.from))} → ${safe(name(d.to))}：${money(d.amount)}</div>`).join('');$('settleDate').value=today();$('settleMemo').value='';$('settleOverlay').classList.remove('hidden');}
-function renderForm(){let p=$('payer').value,r=$('receiver').value;$('payer').innerHTML=opts();$('receiver').innerHTML=opts();if(p!=='')$('payer').value=p;if(r!=='')$('receiver').value=r;$('beneficiaries').innerHTML=state.members.map((n,i)=>`<label class="checkrow"><input type="checkbox" value="${i}" ${i===0?'checked':''}>${safe(n)}</label>`).join('');}
-function showForm(m){editingId=null;mode=m;$('formPanel').classList.remove('hidden');$('formTitle').textContent=m==='expense'?'🛍️ 記一筆花費':'💸 記部分還款';$('saveEntryButton').textContent='✓ 新增帳目';$('payerLabel').textContent=m==='expense'?'誰付的錢？':'誰還錢？';$('expenseFields').classList.toggle('hidden',m!=='expense');$('entryDateField').classList.toggle('hidden',m!=='expense');$('repayFields').classList.toggle('hidden',m!=='repay');$('memo').value='';$('amount').value='';$('entryDate').value=today();$('repayDate').value=today();renderForm();$('formPanel').scrollIntoView({behavior:'smooth',block:'start'});}
-function hideForm(){editingId=null;$('formPanel').classList.add('hidden');}
-function audit(action,before,after){state.audit??=[];state.audit.unshift({id:uid(),action,at:new Date().toISOString(),before,after});state.audit=state.audit.slice(0,250);}
-function saveEntry(){let amount=Math.round(Number($('amount').value)*100),payer=Number($('payer').value),receiver=Number($('receiver').value),memo=$('memo').value.trim()||(mode==='expense'?'未命名花費':'部分還款');if(!Number.isSafeInteger(amount)||amount<=0){alert('請輸入大於 0 的正確金額');return;}let people=[];if(mode==='expense'){people=[...$('beneficiaries').querySelectorAll('input:checked')].map(x=>Number(x.value));if(!people.length){alert('至少勾選一位分攤的人');return;}}else if(receiver===payer){alert('還款人與收款人不能相同');return;}let date=mode==='repay'?$('repayDate').value:$('entryDate').value;if(!date){alert('請選擇日期');return;}let existing=editingId?state.entries.find(e=>String(e.id)===String(editingId)&&!e.deleted):null;if(editingId&&!existing){alert('找不到要編輯的帳目');return;}if(mode==='repay'&&!existing){let owed=getDebts().find(d=>d.from===payer&&d.to===receiver);if(!owed||amount>owed.amount){alert('還款金額不能超過目前欠款：'+money(owed?.amount||0));return;}}if(existing&&!confirm('編輯後會重新計算所有欠款及抵銷，確定儲存嗎？'))return;let entry={id:existing?.id||uid(),kind:mode,amount,payer,receiver,people,memo,date:date+'T12:00:00'};if(existing){let old={...existing};Object.assign(existing,entry);audit('編輯帳目',old,{...existing});}else{state.entries.unshift(entry);audit('新增帳目',null,{...entry});}selectedDebts.clear();persist();hideForm();render();}
-function editEntry(id){let e=state.entries.find(x=>String(x.id)===String(id)&&!x.deleted);if(!e){alert('找不到帳目');return;}showForm(e.kind);editingId=e.id;$('formTitle').textContent='✏️ 編輯'+(e.kind==='expense'?'消費':'還款')+'帳目';$('saveEntryButton').textContent='✓ 儲存修改';$('memo').value=e.memo||'';$('amount').value=(e.amount/100).toFixed(2);$('payer').value=String(e.payer);$('receiver').value=String(e.receiver??0);$('entryDate').value=String(e.date||'').slice(0,10)||today();$('repayDate').value=String(e.date||'').slice(0,10)||today();if(e.kind==='expense')$('beneficiaries').querySelectorAll('input').forEach(x=>x.checked=(e.people||[]).includes(Number(x.value)));$('formPanel').scrollIntoView({behavior:'smooth',block:'start'});}
-function deleteEntry(id){let e=state.entries.find(x=>String(x.id)===String(id)&&!x.deleted);if(!e)return;if(!confirm(`確定將「${e.memo||'帳目'}」移到回收區？欠款會重新計算。`))return;audit('移到回收區',{...e},null);e.deleted=true;e.deletedAt=new Date().toISOString();selectedDebts.clear();persist();render();}
-function restoreEntry(id){let e=state.entries.find(x=>String(x.id)===String(id)&&x.deleted);if(!e)return;let old={...e};delete e.deleted;delete e.deletedAt;audit('還原帳目',old,{...e});selectedDebts.clear();persist();render();}
-function openSettle(from,to){let d=getDebts().find(x=>x.from===from&&x.to===to);if(!d)return;settling=[{from,to,amount:d.amount}];$('settleDesc').textContent=`${name(from)} 還給 ${name(to)} ${money(d.amount)}`;$('settleItems').innerHTML='';$('settleDate').value=today();$('settleMemo').value='';$('settleOverlay').classList.remove('hidden');}
-function cancelSettle(){settling=null;$('settleOverlay').classList.add('hidden');renderPeople();}
-function confirmSettle(){if(!settling?.length)return;let date=$('settleDate').value;if(!date){alert('請填還款日期');return;}let ds=getDebts(),items=settling.map(s=>ds.find(d=>d.from===s.from&&d.to===s.to)).filter(Boolean);if(items.length!==settling.length){alert('欠款已變動，請重新選取');cancelSettle();return;}let total=items.reduce((a,d)=>a+d.amount,0);if(!confirm(`確認將 ${items.length} 組欠款，共 ${money(total)}，記為已還款？`))return;for(const d of items){let e={id:uid(),kind:'repay',amount:d.amount,payer:d.from,receiver:d.to,people:[],memo:$('settleMemo').value.trim()||'勾選已還清',date:date+'T12:00:00',settled:true};state.entries.unshift(e);audit('還清欠款',null,{...e});}selectedDebts.clear();persist();settling=null;$('settleOverlay').classList.add('hidden');render();}
-function setTab(t){tab=t;renderRecords();}
-function renderRecords(){ $('tabPending').classList.toggle('active',tab==='pending');$('tabPaid').classList.toggle('active',tab==='paid');let debts=getDebts();if(tab==='pending'){$('records').innerHTML=debts.length?debts.map(d=>`<div class="record"><div><strong>${safe(name(d.from))} 欠 ${safe(name(d.to))}</strong><small>目前尚未結清</small></div><div class="recordright"><strong>${money(d.amount)}</strong></div></div>`).join(''):'<div class="none">🎉 全部結清！</div>';return;}let paid=state.entries.filter(e=>e.kind==='repay'&&!e.deleted);$('records').innerHTML=paid.length?paid.map(e=>`<div class="record"><div><strong>${safe(name(e.payer))} → ${safe(name(e.receiver))}</strong><small>${safe(e.memo)}${e.settled?' · 已結清':''}</small><small>還款日：${safe(String(e.date||'').slice(0,10))}</small></div><div class="recordright"><strong>${money(e.amount)}</strong><div><button class="btn danger small" style="margin-top:8px" onclick="removeEntry('${safe(e.id)}')">刪除</button></div></div></div>`).join(''):'<div class="none">還沒有還款紀錄</div>';}
-function removeEntry(id){deleteEntry(id);}
-function renderMembers(){$('members').innerHTML=state.members.map((n,i)=>`<div class="field"><label for="member${i}">家人 ${i+1}</label><input id="member${i}" maxlength="20" value="${safe(n)}"><div style="margin-top:8px"><button class="btn soft small" onclick="chooseAvatar(${i})">${avatarHtml(i)} 更換頭像</button></div></div>`).join('');}
-function saveMembers(){let names=state.members.map((_,i)=>$('member'+i).value.trim());if(names.some(n=>!n)||new Set(names).size!==4){alert('四位家人的名稱不可空白或重複');return;}state.members=names;persist();render();alert('家人名稱已更新');}
-function exportBackup(){let blob=new Blob([JSON.stringify({...state,version:2},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='家庭分帳備份_'+today()+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-async function importBackup(event){let file=event.target.files?.[0];event.target.value='';if(!file)return;try{let s=JSON.parse(await file.text());if(!Array.isArray(s.members)||s.members.length!==4||s.members.some(n=>typeof n!=='string')||!Array.isArray(s.entries))throw Error('備份格式不正確');if(s.entries.some(e=>typeof e.id!=='string'||!/^[a-zA-Z0-9_-]{1,100}$/.test(e.id)))throw Error('帳目識別碼格式不正確');if(!confirm('匯入會取代目前帳本，確定繼續嗎？'))return;state={...defaultState(),...s,avatars:Array.isArray(s.avatars)?s.avatars:['🐱','🌷','👨','🐻']};persist();render();alert('備份已還原');}catch(e){alert('匯入失敗：'+e.message);}}
-function renderManager(){let active=state.entries.filter(e=>!e.deleted),trash=state.entries.filter(e=>e.deleted);$('entryManager').innerHTML=active.length?active.map(e=>`<div class="editRecord"><div><b>${e.kind==='expense'?'🛒':'💸'} ${safe(e.memo)}</b> <b style="float:right">${money(e.amount)}</b></div><div class="hint">${safe(String(e.date||'').slice(0,10))} · ${safe(name(e.payer))}${e.kind==='expense'?' 付款 · 分攤：'+(e.people||[]).map(name).map(safe).join('、'):' 還給 '+safe(name(e.receiver))}</div><div class="inlineActions"><button class="btn secondary tiny" onclick="editEntry('${safe(e.id)}')">✏️ 編輯</button><button class="btn danger tiny" onclick="deleteEntry('${safe(e.id)}')">🗑️ 刪除</button></div></div>`).join(''):'<div class="hint">目前沒有原始帳目</div>';$('trashCount').textContent=`(${trash.length})`;$('trashRecords').innerHTML=trash.length?trash.map(e=>`<div class="editRecord"><b>${safe(e.memo)} · ${money(e.amount)}</b><div class="hint">${safe(String(e.date||'').slice(0,10))}</div><button class="btn secondary tiny" onclick="restoreEntry('${safe(e.id)}')">↩️ 還原</button></div>`).join(''):'<div class="hint">回收區是空的</div>';$('auditRecords').innerHTML=(state.audit||[]).length?(state.audit||[]).map(a=>`<div class="audit">${safe(String(a.at||'').replace('T',' ').slice(0,19))} · ${safe(a.action)} · ${safe(a.after?.memo||a.before?.memo||'帳目')}</div>`).join(''):'<div class="hint">目前沒有修改紀錄</div>';}
-function render(){renderPeople();renderRecords();renderManager();renderMembers();}
-const SUPA_URL='https://tlfbomkrqzpqkrfibanz.supabase.co',SUPA_KEY='sb_publishable_l01ADVz-aulQmd62CvDrjg_RqlikFcw';
-let token=null,saveTimer=null,loadingCloud=false;
-const avatarHtml=i=>{let v=(state.avatars||[])[i]||['🐱','🌷','👨','🐻'][i];return v.startsWith('data:image/')?`<img src="${v}" alt="頭像" style="width:40px;height:40px;border-radius:50%;object-fit:cover;vertical-align:middle">`:safe(v)};
-async function chooseAvatar(i){let v=prompt('輸入喜歡的 emoji（例如 🐱 🌷 🐻 🐰）\n若要上傳照片，請按「取消」，再選擇照片。','🐱');if(v!==null){if(!v.trim())return;state.avatars??=['🐱','🌷','👨','🐻'];state.avatars[i]=v.trim().slice(0,12);persist();render();return;}let input=document.createElement('input');input.type='file';input.accept='image/*';input.onchange=()=>{let file=input.files?.[0];if(!file)return;if(file.size>2*1024*1024){alert('請選擇小於 2MB 的照片');return;}let r=new FileReader();r.onload=()=>{let img=new Image();img.onload=()=>{let c=document.createElement('canvas');c.width=c.height=160;let ctx=c.getContext('2d'),size=Math.min(img.width,img.height);ctx.drawImage(img,(img.width-size)/2,(img.height-size)/2,size,size,0,0,160,160);state.avatars??=['🐱','🌷','👨','🐻'];state.avatars[i]=c.toDataURL('image/jpeg',.7);persist();render();};img.src=r.result;};r.readAsDataURL(file);};input.click();}
-async function api(path,method='GET',body,authToken=token){let r=await fetch(SUPA_URL+'/rest/v1/'+path,{method,headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+authToken,'Content-Type':'application/json','Prefer':'return=representation'},body:body===undefined?undefined:JSON.stringify(body)});let data=await r.json().catch(()=>null);if(!r.ok)throw Error(data?.message||'伺服器錯誤 '+r.status);return data;}
-async function cloudLogin(){let email=$('loginEmail').value.trim(),password=$('loginPassword').value;if(!email||!password){alert('請輸入 Email 和密碼');return;}try{let r=await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{method:'POST',headers:{'apikey':SUPA_KEY,'Content-Type':'application/json'},body:JSON.stringify({email,password})}),d=await r.json();if(!r.ok)throw Error(d.error_description||d.msg||d.error||'登入失敗');token=d.access_token;sessionStorage.setItem('family_token',token);await loadCloud();}catch(e){token=null;alert('登入或讀取失敗：'+e.message);}}
-async function loadCloud(){loadingCloud=true;try{let data=await api('family_ledger_state?select=payload&id=eq.1');if(!data.length)throw Error('找不到家庭帳本');let p=data[0].payload;if(!Array.isArray(p.members)||!Array.isArray(p.entries))throw Error('雲端資料格式錯誤');state={...defaultState(),...p};$('ledgerContent').classList.remove('hidden');$('loginBox').classList.add('hidden');$('logoutBtn').classList.remove('hidden');$('cloudStatus').textContent='☁️ 已登入，使用雲端共用帳本';render();}finally{loadingCloud=false;}}
-function queueCloudSave(){if(!token||loadingCloud)return;clearTimeout(saveTimer);$('cloudStatus').textContent='⏳ 正在同步…';saveTimer=setTimeout(saveCloud,450);}
-async function saveCloud(){try{await api('family_ledger_state?id=eq.1','PATCH',{payload:state,updated_at:new Date().toISOString()});$('cloudStatus').textContent='☁️ 已同步 '+new Date().toLocaleTimeString('zh-TW');}catch(e){$('cloudStatus').textContent='⚠️ 同步失敗，請勿關閉網頁：'+e.message;alert('雲端同步失敗：'+e.message);}}
-function cloudLogout(){clearTimeout(saveTimer);token=null;sessionStorage.removeItem('family_token');state=defaultState();$('ledgerContent').classList.add('hidden');$('loginBox').classList.remove('hidden');$('logoutBtn').classList.add('hidden');$('cloudStatus').textContent='請先登入，才會啟用雲端帳本。';$('loginPassword').value='';render();}
-render();
-(async()=>{let t=sessionStorage.getItem('family_token');if(t){token=t;try{await loadCloud();}catch(e){cloudLogout();}}})();
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>托育人員在職訓練紀錄表</title>
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-light: #e0f2fe;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+        }
+        .container { width: 100%; max-width: 480px; box-sizing: border-box; }
+        h1 { font-size: 20px; text-align: center; color: var(--primary); margin: 12px 0; }
+        .card { background: var(--card); border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .stat-box { background: var(--bg); padding: 12px; border-radius: 8px; text-align: center; border: 1px solid #e2e8f0; }
+        .stat-val { font-size: 18px; font-weight: bold; color: var(--primary); margin-top: 4px; }
+        .stat-val.alert { color: var(--danger); }
+        .alert-banner { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 10px; border-radius: 8px; font-size: 13px; margin-bottom: 12px; line-height: 1.4; }
+        
+        label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px; color: var(--text); }
+        input, select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 15px; box-sizing: border-box; margin-bottom: 12px; background: #fff; }
+        .btn { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; }
+        
+        table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: center; }
+        th { background: #f1f5f9; padding: 8px; font-weight: 600; border-bottom: 2px solid #e2e8f0; }
+        td { padding: 8px; border-bottom: 1px solid #edf2f7; }
+        .badge { padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 11px; }
+        .badge.ok { background: #dcfce7; color: #166534; }
+        .badge.no { background: #fee2e2; color: #991b1b; }
 
-</script></body></html>
+        .log-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #edf2f7; font-size: 14px; }
+        .log-meta { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+        .toggle-btn { background: #f1f5f9; border: 1px solid #cbd5e1; padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer; }
+        .toggle-btn.is-active { background: var(--primary-light); color: var(--primary); border-color: #bae6fd; }
+        .del-btn { color: var(--danger); background: none; border: none; font-size: 12px; cursor: pointer; margin-left: 8px; }
+        .section-title { font-size:14px; margin: 0 0 10px 0; color: var(--text); }
+        .small-note { font-size:12px; color:var(--text-muted); line-height:1.5; margin-top:-4px; margin-bottom:10px; }
+        .range-box { background: var(--primary-light); border: 1px solid #bae6fd; color: #075985; padding: 10px; border-radius: 8px; font-size: 13px; line-height: 1.5; margin-top: 8px; }
+        .secondary-btn { width: 100%; padding: 10px; background: white; color: var(--primary); border: 1px solid #bae6fd; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; }
+        .button-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .filter-card { padding-bottom: 12px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>👶 托育在職訓練紀錄</h1>
+
+    <div class="card">
+        <h3 class="section-title">⚙️ 登記證三年週期設定</h3>
+        <label>登記證起算日</label>
+        <input type="date" id="cycle-start">
+        <button class="secondary-btn" onclick="saveCycleStart()">儲存起算日</button>
+        <div class="range-box" id="cycle-range">請設定登記證起算日</div>
+    </div>
+
+    <div class="card filter-card">
+        <h3 class="section-title">📅 年度進度檢視</h3>
+        <label>目前檢視年度</label>
+        <select id="year-select" onchange="changeSelectedYear()"></select>
+        <div class="small-note" id="year-filter-note"></div>
+    </div>
+
+    <!-- 儀表板 -->
+    <div class="card">
+        <div class="grid-2">
+            <div class="stat-box">
+                <div style="font-size:12px;color:var(--text-muted)"><span id="year-label">年度</span> 已認列 / 目標</div>
+                <div class="stat-val" id="year-hours">0 / 18 小時</div>
+            </div>
+            <div class="stat-box">
+                <div style="font-size:12px;color:var(--text-muted)"><span id="year-lack-label">年度</span> 尚缺時數</div>
+                <div class="stat-val" id="year-lack">18 小時</div>
+            </div>
+        </div>
+        <div class="grid-2" style="margin-top: 10px;">
+            <div class="stat-box">
+                <div style="font-size:12px;color:var(--text-muted)">3年9類達標</div>
+                <div class="stat-val" id="cats-done">0 / 9 類</div>
+            </div>
+            <div class="stat-box">
+                <div style="font-size:12px;color:var(--text-muted)">年度完成率</div>
+                <div class="stat-val" id="year-rate">0%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 特殊檢核警示 -->
+    <div class="alert-banner" id="alert-banner">
+        載入中...
+    </div>
+
+    <!-- 新增紀錄 -->
+    <div class="card">
+        <label>上課日期</label>
+        <input type="date" id="c-date">
+        
+        <label>課程名稱</label>
+        <input type="text" id="c-name" placeholder="請輸入課程名稱">
+        
+        <div class="grid-2">
+            <div>
+                <label>課程類別</label>
+                <select id="c-cat">
+                    <option value="第一類">第一類 (兒發)</option>
+                    <option value="第二類">第二類</option>
+                    <option value="第三類">第三類</option>
+                    <option value="第四類">第四類</option>
+                    <option value="第五類">第五類 (安全)</option>
+                    <option value="第六類">第六類 (含CPR)</option>
+                    <option value="第七類">第七類</option>
+                    <option value="第八類">第八類</option>
+                    <option value="第九類">第九類</option>
+                </select>
+            </div>
+            <div>
+                <label>上課時數</label>
+                <input type="number" id="c-hours" step="0.5" min="0.5" placeholder="小時">
+            </div>
+        </div>
+        
+        <label>主辦單位 / 備註</label>
+        <input type="text" id="c-note" placeholder="例如：公司開、CPR 複訓">
+        
+        <button class="btn" onclick="addCourse()">新增課程紀錄</button>
+    </div>
+
+    <!-- 九大類別進度表 -->
+    <div class="card" style="padding: 10px;">
+        <h3 style="font-size:14px; margin: 4px 0 10px 6px;">九大類別檢核表</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>類別</th>
+                    <th>3年累計</th>
+                    <th>3年尚缺</th>
+                    <th>本年累計</th>
+                    <th>本年尚缺</th>
+                    <th>狀態</th>
+                </tr>
+            </thead>
+            <tbody id="cat-table-body">
+                <!-- 動態產生 -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h3 class="section-title">💾 資料備份與還原</h3>
+        <div class="small-note">備份檔會包含所有課程紀錄、三年週期起算日與目前設定。</div>
+        <div class="button-row">
+            <button class="secondary-btn" onclick="exportData()">匯出 JSON 備份</button>
+            <button class="secondary-btn" onclick="document.getElementById('import-file').click()">匯入 JSON 備份</button>
+        </div>
+        <input type="file" id="import-file" accept="application/json,.json" style="display:none" onchange="importData(event)">
+    </div>
+
+    <!-- 歷史清單 -->
+    <div class="card">
+        <h3 style="font-size:14px; margin: 0 0 10px 0;">課程清單 (最新在最前)</h3>
+        <div id="course-list"></div>
+    </div>
+</div>
+
+<script>
+const STORAGE_KEY='nanny_courses', SETTINGS_KEY='nanny_training_settings';
+const catTargets={"第一類":{tri:3,yr:1},"第二類":{tri:3,yr:0},"第三類":{tri:3,yr:0},"第四類":{tri:3,yr:0},"第五類":{tri:3,yr:4},"第六類":{tri:8,yr:0},"第七類":{tri:3,yr:0},"第八類":{tri:3,yr:0},"第九類":{tri:3,yr:0}};
+let courses=JSON.parse(localStorage.getItem(STORAGE_KEY))||[];
+let settings=JSON.parse(localStorage.getItem(SETTINGS_KEY))||{cycleStart:'',selectedYear:null};
+
+function parseDate(v){if(!v)return null;const d=new Date(v+'T00:00:00');return Number.isNaN(d.getTime())?null:d}
+function formatDate(d){return d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate()}
+function getCycleRange(){const s=parseDate(settings.cycleStart);if(!s)return null;const e=new Date(s);e.setFullYear(e.getFullYear()+3);e.setDate(e.getDate()-1);return{start:s,end:e}}
+function isInCycle(v){const r=getCycleRange();if(!r)return true;const d=parseDate(v);return !!d&&d>=r.start&&d<=r.end}
+function getCycleYears(){const r=getCycleRange();if(!r)return[new Date().getFullYear()];const a=[];for(let y=r.start.getFullYear();y<=r.end.getFullYear();y++)a.push(y);return a}
+function saveSettings(){localStorage.setItem(SETTINGS_KEY,JSON.stringify(settings))}
+function refreshCycleUI(){const box=document.getElementById('cycle-range'),r=getCycleRange();if(!r){box.innerText='請設定登記證起算日，系統會自動計算三年有效區間與可檢視年度。';return}box.innerHTML='<strong>有效區間：</strong>'+formatDate(r.start)+' ～ '+formatDate(r.end)+'<br><span style="font-size:12px">本週期共 3 年，系統只會將區間內課程計入九大類別三年累計。</span>'}
+function refreshYearSelect(){const s=document.getElementById('year-select'),ys=getCycleYears(),now=new Date().getFullYear();if(!settings.selectedYear||!ys.includes(Number(settings.selectedYear))){settings.selectedYear=ys.includes(now)?now:ys[0];saveSettings()}s.innerHTML=ys.map(y=>'<option value="'+y+'"'+(Number(settings.selectedYear)===y?' selected':'')+'>'+y+' 年度</option>').join('');document.getElementById('year-label').innerText=settings.selectedYear+' 年度';document.getElementById('year-lack-label').innerText=settings.selectedYear+' 年度';document.getElementById('year-filter-note').innerText=getCycleRange()?'正在檢視 '+settings.selectedYear+' 年的年度進度；三年累計則依登記證有效區間計算。':'尚未設定起算日，目前暫以 '+settings.selectedYear+' 年度檢視。'}
+function saveCycleStart(){const v=document.getElementById('cycle-start').value;if(!v){alert('請先選擇登記證起算日！');return}settings.cycleStart=v;settings.selectedYear=null;saveSettings();refreshCycleUI();refreshYearSelect();render()}
+function changeSelectedYear(){settings.selectedYear=Number(document.getElementById('year-select').value);saveSettings();refreshYearSelect();render()}
+function initUI(){document.getElementById('c-date').valueAsDate=new Date();document.getElementById('cycle-start').value=settings.cycleStart||'';refreshCycleUI();refreshYearSelect();render()}
+
+function render(){
+ const y=Number(settings.selectedYear||new Date().getFullYear()),stats={};for(const k in catTargets)stats[k]={triSum:0,yrSum:0};let total=0;
+ courses.forEach(c=>{if(!c.isApproved||!stats[c.cat])return;const h=parseFloat(c.hours)||0;if(isInCycle(c.date))stats[c.cat].triSum+=h;if(String(c.date).startsWith(String(y)+'-')){stats[c.cat].yrSum+=h;total+=h}});
+ const lack=Math.max(0,18-total);document.getElementById('year-hours').innerText=total.toFixed(1)+' / 18 小時';document.getElementById('year-lack').innerText=lack.toFixed(1)+' 小時';document.getElementById('year-rate').innerText=Math.min(100,total/18*100).toFixed(0)+'%';
+ const tbody=document.getElementById('cat-table-body');tbody.innerHTML='';let done=0;
+ for(const cat in catTargets){const t=catTargets[cat],s=stats[cat],tl=Math.max(0,t.tri-s.triSum),yl=Math.max(0,t.yr-s.yrSum);if(tl===0)done++;const badge=tl===0?'<span class="badge ok">達標</span>':'<span class="badge no">缺時數</span>';const tr=document.createElement('tr');tr.innerHTML='<td style="font-weight:600">'+cat+'</td><td>'+s.triSum.toFixed(1)+' / '+t.tri+'</td><td style="color:'+(tl>0?'var(--danger)':'var(--success)')+'">'+tl.toFixed(1)+'</td><td>'+s.yrSum.toFixed(1)+'</td><td style="color:'+(yl>0?'var(--danger)':'var(--text-muted)')+'">'+(t.yr>0?yl.toFixed(1):'-')+'</td><td>'+badge+'</td>';tbody.appendChild(tr)}
+ document.getElementById('cats-done').innerText=done+' / 9 類';
+ const c1=Math.max(0,catTargets["第一類"].yr-stats["第一類"].yrSum),c5=Math.max(0,catTargets["第五類"].yr-stats["第五類"].yrSum),a=document.getElementById('alert-banner');
+ if(c1>0||c5>0){a.style.background='#fef2f2';a.style.color='#991b1b';a.style.borderColor='#fecaca';a.innerText='⚠️ '+y+' 年度特定類別尚缺：第1類(兒發)缺 '+c1.toFixed(1)+' 小時 / 第5類(安全)缺 '+c5.toFixed(1)+' 小時'}else{a.style.background='#ecfdf5';a.style.color='#065f46';a.style.borderColor='#a7f3d0';a.innerText='🎉 太棒了！'+y+' 年度第 1 類與第 5 類的核心時數皆已達標！'}
+ const list=document.getElementById('course-list');list.innerHTML='';if(!courses.length)list.innerHTML='<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:10px;">暫無課程紀錄</div>';
+ courses.slice().reverse().forEach((c,i)=>{const idx=courses.length-1-i,d=document.createElement('div');d.className='log-item';const warn=isInCycle(c.date)?'':' <span style="color:var(--danger);font-size:11px;">（不在目前三年週期）</span>';d.innerHTML='<div><div style="font-weight:600">'+escapeHtml(c.name)+' <span style="color:var(--primary);font-size:12px;">['+c.cat+']</span></div><div class="log-meta">'+c.date+' | '+escapeHtml(c.note||'無備註')+warn+'</div></div><div style="display:flex;align-items:center;"><span style="font-weight:bold;margin-right:10px;color:'+(c.isApproved?'var(--success)':'var(--text-muted)')+'">'+c.hours+' 小時</span><button class="toggle-btn '+(c.isApproved?'is-active':'')+'" onclick="toggleApprove('+idx+')">'+(c.isApproved?'已認列':'未認列')+'</button><button class="del-btn" onclick="deleteCourse('+idx+')">🗑️</button></div>';list.appendChild(d)})
+}
+
+function addCourse(){const date=document.getElementById('c-date').value,name=document.getElementById('c-name').value.trim(),cat=document.getElementById('c-cat').value,hours=document.getElementById('c-hours').value,note=document.getElementById('c-note').value.trim();if(!date||!name||!hours){alert('請填寫完整必填欄位 (日期、課程名稱、時數)！');return}courses.push({date,name,cat,hours:parseFloat(hours),note,isApproved:true});localStorage.setItem(STORAGE_KEY,JSON.stringify(courses));document.getElementById('c-name').value='';document.getElementById('c-hours').value='';document.getElementById('c-note').value='';render()}
+function toggleApprove(i){courses[i].isApproved=!courses[i].isApproved;localStorage.setItem(STORAGE_KEY,JSON.stringify(courses));render()}
+function deleteCourse(i){if(confirm('確定要刪除這筆課時紀錄嗎？')){courses.splice(i,1);localStorage.setItem(STORAGE_KEY,JSON.stringify(courses));render()}}
+function exportData(){const b={app:'托育在職訓練紀錄',version:2,exportedAt:new Date().toISOString(),settings,courses},blob=new Blob([JSON.stringify(b,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='托育在職訓練備份_'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url)}
+function importData(e){const f=e.target.files&&e.target.files[0];if(!f)return;const r=new FileReader();r.onload=x=>{try{const d=JSON.parse(x.target.result);if(!Array.isArray(d.courses))throw new Error();if(!confirm('匯入後會覆蓋目前瀏覽器內的課程紀錄與設定，確定要繼續嗎？'))return;courses=d.courses.map(c=>({date:String(c.date||''),name:String(c.name||''),cat:String(c.cat||'第一類'),hours:Number(c.hours)||0,note:String(c.note||''),isApproved:c.isApproved!==false}));settings={cycleStart:d.settings&&d.settings.cycleStart?d.settings.cycleStart:'',selectedYear:d.settings&&d.settings.selectedYear?Number(d.settings.selectedYear):null};localStorage.setItem(STORAGE_KEY,JSON.stringify(courses));saveSettings();document.getElementById('cycle-start').value=settings.cycleStart||'';refreshCycleUI();refreshYearSelect();render();alert('資料匯入成功！共匯入 '+courses.length+' 筆課程紀錄。')}catch(err){alert('匯入失敗：請確認你選擇的是本系統匯出的有效 JSON 備份檔。')}finally{e.target.value=''}};r.readAsText(f,'utf-8')}
+function escapeHtml(t){return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
+initUI();
+</script>
+</body>
+</html>
